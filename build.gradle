@@ -12,8 +12,8 @@ jacoco {
 
 sonar {
 	properties {
-		property "sonar.projectKey", "sonar-test-lsj_sonar-test"
-		property "sonar.organization", "sonar-test-lsj"
+		property "sonar.projectKey", "My-Music-Note_back"
+		property "sonar.organization", "my-music-note"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
 	}
