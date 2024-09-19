@@ -11,7 +11,7 @@ public class HomeController {
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
     public String home() {
-        return "Hello World!";
+        return "Hello World!!";
     }
 
 }
