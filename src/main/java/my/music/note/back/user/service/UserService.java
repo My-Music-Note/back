@@ -33,6 +33,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-
+    public void modifyName(ModifyNameRequest request, String providerId) {
+        User user = userRepository.findByProviderId(providerId);
+        user.modifyName(request);
+        userRepository.save(user);
+    }
 
 }
