@@ -3,8 +3,8 @@ name: Continuous Integration
 on:
 
   pull_request:
-    branches: [dev, main]
-    types: [opened, synchronize]
+    branches: [ dev, main ]
+    types: [ opened, synchronize ]
 
 jobs:
   testing:
@@ -38,8 +38,15 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
+      - name: AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew test jacocoTestReport sonar --info
+        run: ./gradlew test jacocoTestReport sonar —info
