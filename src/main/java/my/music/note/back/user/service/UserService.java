@@ -27,6 +27,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void deleteUser(DeleteAccountRequest request) {
+        User user = userRepository.findByProviderId(request.providerId());
+        user.deleteAccount();
+        userRepository.save(user);
+    }
+
 
 
 }
