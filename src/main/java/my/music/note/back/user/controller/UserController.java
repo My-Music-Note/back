@@ -23,7 +23,7 @@ public class UserController {
 
     private final TokenService tokenService;
 
-    @PostMapping("/login-or-register")
+    @PostMapping
     public ResponseEntity<TokenCreateResponse> loginOrRegister(@RequestBody LoginOrRegisterRequest request) {
 
         User user = userService.loginOrRegister(request);
@@ -45,9 +45,6 @@ public class UserController {
         Long userId = tokenService.getUserId(token);
         userService.modifyName(request, userId);
     }
-
-
-
 
 
 }
