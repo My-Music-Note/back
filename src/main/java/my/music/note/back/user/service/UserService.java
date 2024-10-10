@@ -7,6 +7,7 @@ import my.music.note.back.user.dto.request.DeleteAccountRequest;
 import my.music.note.back.user.dto.request.FindUserRequest;
 import my.music.note.back.user.dto.request.LoginOrRegisterRequest;
 import my.music.note.back.user.dto.request.ModifyNameRequest;
+import my.music.note.back.user.dto.response.FindUserResponse;
 import my.music.note.back.user.entity.User;
 import my.music.note.back.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,10 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public FindUserResponse findUser(FindUserRequest request) {
+        User user = userRepository.findByUserId(request.userId());
+        return user.convertToFindUserResponse();
+    }
 
 
 }

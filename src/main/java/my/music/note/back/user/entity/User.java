@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 import my.music.note.back.user.dto.request.DeleteAccountRequest;
 import my.music.note.back.user.dto.request.LoginOrRegisterRequest;
 import my.music.note.back.user.dto.request.ModifyNameRequest;
+import my.music.note.back.user.dto.response.FindUserResponse;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
@@ -43,9 +43,20 @@ public class User {
 
     Boolean isDeleted;
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
 
     public static User of(LoginOrRegisterRequest request) {
         return new User(request.name(), LocalDateTime.now(), request.email(), request.provider(), request.providerId(), false, false);
+    }
+
+    public FindUserResponse convertToFindUserResponse() {
+        return new FindUserResponse(this.userName, this.email, this.isAdmin);
     }
 
     public void deleteAccount() {
