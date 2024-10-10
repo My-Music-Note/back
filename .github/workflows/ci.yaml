@@ -49,4 +49,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew test jacocoTestReport sonar —info
+        run: ./gradlew test jacocoTestReport sonar --info
