@@ -25,7 +25,7 @@ public class TokenService {
 
     private static final String AUTHORITY = "authority";
 
-    public TokenCreateResponse createToken(String providerId, boolean isAdmin) {
+    public TokenCreateResponse createToken(Long userId, boolean isAdmin) {
 
         Date issuedAt = new Date(System.currentTimeMillis());
 
@@ -39,7 +39,7 @@ public class TokenService {
 
         String token = JWT.create()
                 .withIssuer(tokenConfig.getIssuer())
-                .withSubject(providerId)
+                .withSubject(String.valueOf(userId))
                 .withIssuedAt(issuedAt)
                 .withExpiresAt(new Date(issuedAt.getTime() + tokenConfig.getAccessExpiration()))
                 .withClaim(AUTHORITY, authority)
@@ -52,9 +52,9 @@ public class TokenService {
         return tokenValidator.verify(token);
     }
 
-    public String getProviderId(String token) {
+    public Long getUserId(String token) {
         DecodedJWT decodedJWT = isValidToken(token);
-        return decodedJWT.getSubject();
+        return Long.valueOf(decodedJWT.getSubject());
     }
 
 }
