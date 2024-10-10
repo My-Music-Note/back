@@ -4,6 +4,7 @@ package my.music.note.back.user.service;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import my.music.note.back.user.dto.request.DeleteAccountRequest;
+import my.music.note.back.user.dto.request.FindUserRequest;
 import my.music.note.back.user.dto.request.LoginOrRegisterRequest;
 import my.music.note.back.user.dto.request.ModifyNameRequest;
 import my.music.note.back.user.entity.User;
@@ -28,15 +29,17 @@ public class UserService {
     }
 
     public void deleteUser(DeleteAccountRequest request) {
-        User user = userRepository.findByProviderId(request.providerId());
+        User user = userRepository.findByUserId(request.userId());
         user.deleteAccount();
         userRepository.save(user);
     }
 
-    public void modifyName(ModifyNameRequest request, String providerId) {
-        User user = userRepository.findByProviderId(providerId);
+    public void modifyName(ModifyNameRequest request, Long userId) {
+        User user = userRepository.findByUserId(userId);
         user.modifyName(request);
         userRepository.save(user);
     }
+
+
 
 }

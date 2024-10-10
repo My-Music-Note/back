@@ -1,10 +1,12 @@
 package my.music.note.back.user.controller;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import my.music.note.back.jwt.dto.response.TokenCreateResponse;
 import my.music.note.back.jwt.service.TokenService;
 import my.music.note.back.user.dto.request.DeleteAccountRequest;
+import my.music.note.back.user.dto.request.FindUserRequest;
 import my.music.note.back.user.dto.request.LoginOrRegisterRequest;
 import my.music.note.back.user.dto.request.ModifyNameRequest;
 import my.music.note.back.user.entity.User;
@@ -25,7 +27,7 @@ public class UserController {
     public ResponseEntity<TokenCreateResponse> loginOrRegister(@RequestBody LoginOrRegisterRequest request) {
 
         User user = userService.loginOrRegister(request);
-        TokenCreateResponse response = tokenService.createToken(user.getProviderId(), user.getIsAdmin());
+        TokenCreateResponse response = tokenService.createToken(user.getUserId(), user.getIsAdmin());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -33,16 +35,19 @@ public class UserController {
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAccount(@CookieValue String token) {
-        String providerId = tokenService.getProviderId(token);
-        userService.deleteUser(new DeleteAccountRequest(providerId));
+        Long userId = tokenService.getUserId(token);
+        userService.deleteUser(new DeleteAccountRequest(userId));
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public void modifyName(@CookieValue String token, @RequestBody ModifyNameRequest request) {
-        String providerId = tokenService.getProviderId(token);
-        userService.modifyName(request, providerId);
+        Long userId = tokenService.getUserId(token);
+        userService.modifyName(request, userId);
     }
+
+
+
 
 
 }
