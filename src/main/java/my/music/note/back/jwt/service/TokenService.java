@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.RequiredArgsConstructor;
 import my.music.note.back.config.TokenConfig;
+import my.music.note.back.jwt.dto.response.TokenCreateResponse;
 import my.music.note.back.jwt.validator.TokenValidator;
 import my.music.note.back.user.dto.request.DeleteAccountRequest;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class TokenService {
 
     private static final String AUTHORITY = "authority";
 
-    public String createToken(String providerId, boolean isAdmin) {
+    public TokenCreateResponse createToken(String providerId, boolean isAdmin) {
 
         Date issuedAt = new Date(System.currentTimeMillis());
 
@@ -36,13 +37,15 @@ public class TokenService {
             authority = ROLE_USER;
         }
 
-        return JWT.create()
+        String token = JWT.create()
                 .withIssuer(tokenConfig.getIssuer())
                 .withSubject(providerId)
                 .withIssuedAt(issuedAt)
                 .withExpiresAt(new Date(issuedAt.getTime() + tokenConfig.getAccessExpiration()))
                 .withClaim(AUTHORITY, authority)
                 .sign(Algorithm.HMAC512(tokenConfig.getSecret()));
+
+        return new TokenCreateResponse(token);
     }
 
     private DecodedJWT isValidToken(String token) {
