@@ -1,7 +1,5 @@
 package my.music.note.back.user.controller;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import my.music.note.back.jwt.dto.response.TokenCreateResponse;
 import my.music.note.back.jwt.service.TokenService;
@@ -16,7 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/api/users")
+@RestController
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
 
