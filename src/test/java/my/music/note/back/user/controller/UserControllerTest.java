@@ -111,7 +111,7 @@ class UserControllerTest {
                         .cookie(tokenCookie)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userName").value("test-user"))
+                .andExpect(jsonPath("$.name").value("test-user"))
                 .andExpect(jsonPath("$.email").value("testEmail@google.com"))
                 .andExpect(jsonPath("$.isAdmin").value(false));
 

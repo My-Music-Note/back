@@ -1,9 +1,7 @@
 package my.music.note.back.user.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import my.music.note.back.user.dto.request.DeleteAccountRequest;
 import my.music.note.back.user.dto.request.LoginOrRegisterRequest;
 import my.music.note.back.user.dto.request.ModifyNameRequest;
 import my.music.note.back.user.dto.response.FindUserResponse;
@@ -15,8 +13,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class User {
 
-    private User(String userName, LocalDateTime createdAt, String email, String provider, String providerId, boolean isAdmin, boolean isDeleted) {
-        this.userName = userName;
+    private User(String name, LocalDateTime createdAt, String email, String provider, String providerId, boolean isAdmin, boolean isDeleted) {
+        this.name = name;
         this.createdAt = createdAt;
         this.email = email;
         this.provider = provider;
@@ -27,9 +25,9 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long userId;
+    Long id;
 
-    String userName;
+    String name;
 
     LocalDateTime createdAt;
 
@@ -44,7 +42,7 @@ public class User {
     Boolean isDeleted;
 
     public Long getUserId() {
-        return userId;
+        return id;
     }
 
     public Boolean getAdmin() {
@@ -56,7 +54,7 @@ public class User {
     }
 
     public FindUserResponse convertToFindUserResponse() {
-        return new FindUserResponse(this.userName, this.email, this.isAdmin);
+        return new FindUserResponse(this.name, this.email, this.isAdmin);
     }
 
     public void deleteAccount() {
@@ -64,7 +62,7 @@ public class User {
     }
 
     public void modifyName(ModifyNameRequest request) {
-        this.userName = request.name();
+        this.name = request.name();
     }
 
 

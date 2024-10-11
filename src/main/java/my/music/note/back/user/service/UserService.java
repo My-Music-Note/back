@@ -12,6 +12,8 @@ import my.music.note.back.user.entity.User;
 import my.music.note.back.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @AllArgsConstructor
@@ -30,19 +32,27 @@ public class UserService {
     }
 
     public void deleteUser(DeleteAccountRequest request) {
-        User user = userRepository.findByUserId(request.userId());
+        Optional<User> optionalUser = userRepository.findById(request.id());
+
+
+        User user = optionalUser.orElseThrow(RuntimeException::new);
+
         user.deleteAccount();
         userRepository.save(user);
     }
 
     public void modifyName(ModifyNameRequest request, Long userId) {
-        User user = userRepository.findByUserId(userId);
+
+        Optional<User> optionalUser = userRepository.findById(userId);
+        User user = optionalUser.orElseThrow(RuntimeException::new);
+
         user.modifyName(request);
         userRepository.save(user);
     }
 
     public FindUserResponse findUser(FindUserRequest request) {
-        User user = userRepository.findByUserId(request.userId());
+        Optional<User> optionalUser = userRepository.findById(request.id());
+        User user = optionalUser.orElseThrow(RuntimeException::new);
         return user.convertToFindUserResponse();
     }
 
