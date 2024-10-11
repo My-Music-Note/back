@@ -10,6 +10,9 @@ jacoco {
 	toolVersion = "0.8.9"
 }
 
+
+
+
 sonar {
 	properties {
 		property "sonar.projectKey", "My-Music-Note_back"
@@ -36,9 +39,17 @@ repositories {
 	mavenCentral()
 }
 
+
 dependencies {
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.postgresql:postgresql:42.7.2'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'software.amazon.awssdk:kms:2.20.25'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.1.0")
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-parameter-store'
+	implementation 'com.auth0:java-jwt:4.4.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
