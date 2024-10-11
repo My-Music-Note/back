@@ -64,8 +64,8 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").value("this-is-test-token"));
 
-        verify(userService).loginOrRegister(any(LoginOrRegisterRequest.class));
-        verify(tokenService).createToken(anyLong(), anyBoolean());
+        verify(userService,times(1)).loginOrRegister(any(LoginOrRegisterRequest.class));
+        verify(tokenService,times(1)).createToken(anyLong(), anyBoolean());
     }
 
     @Test
