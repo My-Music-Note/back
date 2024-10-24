@@ -1,4 +1,4 @@
-package my.music.note.back.controller;
+package my.music.note.back.health;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
