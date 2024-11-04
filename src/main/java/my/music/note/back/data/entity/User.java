@@ -9,7 +9,7 @@ import my.music.note.back.data.dto.response.user.FindUserResponse;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @NoArgsConstructor
 public class User {
 

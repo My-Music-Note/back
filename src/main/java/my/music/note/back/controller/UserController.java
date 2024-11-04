@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<FindUserResponse> findUserInfo(@CookieValue String token) {
+    public ResponseEntity<FindUserResponse> findUser(@CookieValue String token) {
 
         Long userId = tokenService.getUserId(token);
 
