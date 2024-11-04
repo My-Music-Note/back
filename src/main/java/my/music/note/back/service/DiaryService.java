@@ -39,12 +39,17 @@ public class DiaryService {
     }
 
     public List<FindDiaryResponse> findDiaries(Long userId) {
-        return diaryRepository.findAllByUserId(userId);
+        return diaryRepository.findAllByUserIdAndIsDeletedFalse(userId);
     }
 
     public FindDiaryResponse findDiary(Long diaryId) {
         Optional<Diary> optionalDiary = diaryRepository.findById(diaryId);
         Diary diary = optionalDiary.orElseThrow(IllegalArgumentException::new);
+
+        if (diary.isDeleted()) {
+            throw new IllegalArgumentException();
+        }
+
         return diary.convertToFindDiaryResponse();
     }
 

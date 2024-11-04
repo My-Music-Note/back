@@ -47,6 +47,10 @@ public class Diary {
         this.currentModifiedAt = LocalDateTime.now();
     }
 
+    public boolean isDeleted() {
+        return this.isDeleted;
+    }
+
 
     public FindDiaryResponse convertToFindDiaryResponse() {
         return new FindDiaryResponse(this.id, this.content, this.isLongEntry, this.createdAt, this.currentModifiedAt);
