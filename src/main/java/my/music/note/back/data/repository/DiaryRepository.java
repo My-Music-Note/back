@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface DiaryRepository extends JpaRepository<Diary, Long> {
 
-    List<FindDiaryResponse> findAllByUserId(Long userId);
+    List<FindDiaryResponse> findAllByUserIdAndIsDeletedFalse(Long userId);
 
 }
