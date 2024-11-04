@@ -1,14 +1,12 @@
-package my.music.note.back.jwt.service;
+package my.music.note.back.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.RequiredArgsConstructor;
 import my.music.note.back.config.TokenConfig;
-import my.music.note.back.jwt.dto.response.TokenCreateResponse;
-import my.music.note.back.jwt.validator.TokenValidator;
-import my.music.note.back.user.dto.request.DeleteAccountRequest;
+import my.music.note.back.data.dto.response.jwt.TokenCreateResponse;
+import my.music.note.back.validator.TokenValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

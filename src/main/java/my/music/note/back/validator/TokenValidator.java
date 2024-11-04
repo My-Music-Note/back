@@ -1,4 +1,4 @@
-package my.music.note.back.jwt.validator;
+package my.music.note.back.validator;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
