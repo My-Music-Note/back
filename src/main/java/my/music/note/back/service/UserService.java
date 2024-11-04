@@ -34,11 +34,9 @@ public class UserService {
     public void deleteUser(DeleteAccountRequest request) {
         Optional<User> optionalUser = userRepository.findById(request.id());
 
-
+        
         User user = optionalUser.orElseThrow(RuntimeException::new);
-
-        user.deleteAccount();
-        userRepository.save(user);
+        user.deleteAccount();;
     }
 
     public void modifyName(ModifyNameRequest request, Long userId) {
@@ -47,7 +45,6 @@ public class UserService {
         User user = optionalUser.orElseThrow(RuntimeException::new);
 
         user.modifyName(request);
-        userRepository.save(user);
     }
 
     public FindUserResponse findUser(FindUserRequest request) {
