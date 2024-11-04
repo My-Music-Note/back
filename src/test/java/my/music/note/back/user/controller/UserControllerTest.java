@@ -1,16 +1,15 @@
 package my.music.note.back.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.Cookie;
 import my.music.note.back.controller.UserController;
-import my.music.note.back.data.dto.response.jwt.TokenCreateResponse;
-import my.music.note.back.service.TokenService;
 import my.music.note.back.data.dto.request.user.DeleteAccountRequest;
 import my.music.note.back.data.dto.request.user.FindUserRequest;
 import my.music.note.back.data.dto.request.user.LoginOrRegisterRequest;
 import my.music.note.back.data.dto.request.user.ModifyNameRequest;
+import my.music.note.back.data.dto.response.jwt.TokenCreateResponse;
 import my.music.note.back.data.dto.response.user.FindUserResponse;
 import my.music.note.back.data.entity.User;
+import my.music.note.back.service.TokenService;
 import my.music.note.back.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,7 +44,7 @@ class UserControllerTest {
     @MockBean
     TokenService tokenService;
 
-    Cookie tokenCookie = new Cookie("token", "test-token");
+    String token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1tdXNpYy1ub3RlIiwic3ViIjoiMiIsImlhdCI6MTczMDY4NzIxNCwiZXhwIjoxNzMwNjg5MDE0LCJhdXRob3JpdHkiOiJST0xFX1VTRVIifQ.0JKeOVEmnlKDiZSKl9OJz6rtjLFnpXrXxCb-3hYuBAt9yFGTZIc8aX-jzmpFDL0e9EzSoOHIVhiDFViNC6T9vw";
 
 
     @Test
@@ -65,8 +64,8 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").value("this-is-test-token"));
 
-        verify(userService,times(1)).loginOrRegister(any(LoginOrRegisterRequest.class));
-        verify(tokenService,times(1)).createToken(anyLong(), anyBoolean());
+        verify(userService, times(1)).loginOrRegister(any(LoginOrRegisterRequest.class));
+        verify(tokenService, times(1)).createToken(anyLong(), anyBoolean());
     }
 
     @Test
@@ -76,11 +75,11 @@ class UserControllerTest {
         doNothing().when(userService).deleteUser(deleteAccountRequest);
 
         mockmvc.perform(delete("/api/users")
-                        .cookie(tokenCookie)
+                        .header("Authorization", token)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
-        verify(userService,times(1)).deleteUser(any(DeleteAccountRequest.class));
+        verify(userService, times(1)).deleteUser(any(DeleteAccountRequest.class));
     }
 
     @Test
@@ -92,7 +91,7 @@ class UserControllerTest {
         String content = objectMapper.writeValueAsString(modifyNameRequest);
 
         mockmvc.perform(put("/api/users")
-                        .cookie(tokenCookie)
+                        .header("Authorization", token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content))
                 .andExpect(status().isOk());
@@ -109,7 +108,7 @@ class UserControllerTest {
         when(userService.findUser(any(FindUserRequest.class))).thenReturn(findUserResponse);
 
         mockmvc.perform(get("/api/users")
-                        .cookie(tokenCookie)
+                        .header("Authorization", token)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("test-user"))

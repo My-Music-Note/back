@@ -34,20 +34,20 @@ public class UserController {
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAccount(@CookieValue String token) {
+    public void deleteAccount(@RequestHeader("Authorization") String token) {
         Long userId = tokenService.getUserId(token);
         userService.deleteUser(new DeleteAccountRequest(userId));
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public void modifyName(@CookieValue String token, @RequestBody ModifyNameRequest request) {
+    public void modifyName(@RequestHeader("Authorization") String token, @RequestBody ModifyNameRequest request) {
         Long userId = tokenService.getUserId(token);
         userService.modifyName(request, userId);
     }
 
     @GetMapping
-    public ResponseEntity<FindUserResponse> findUser(@CookieValue String token) {
+    public ResponseEntity<FindUserResponse> findUser(@RequestHeader("Authorization") String token) {
 
         Long userId = tokenService.getUserId(token);
 

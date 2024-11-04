@@ -21,7 +21,6 @@ public class DiaryController {
 
     private final TokenService tokenService;
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void createDiary(@RequestBody DiaryCreateRequest request) {
@@ -49,7 +48,7 @@ public class DiaryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FindDiaryResponse>> FindDiaryResponse(@CookieValue String token) {
+    public ResponseEntity<List<FindDiaryResponse>> FindDiaryResponse(@RequestHeader("Authorization") String token) {
 
         Long userId = tokenService.getUserId(token);
         List<FindDiaryResponse> response = diaryService.findDiaries(userId);
