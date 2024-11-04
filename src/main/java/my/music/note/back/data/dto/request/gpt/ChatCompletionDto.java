@@ -1,4 +1,4 @@
-package my.music.note.back.gpt.dto;
+package my.music.note.back.data.dto.request.gpt;
 
 import lombok.*;
 

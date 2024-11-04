@@ -1,4 +1,4 @@
-package my.music.note.back.gpt.service;
+package my.music.note.back.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import my.music.note.back.config.ChatGPTConfig;
-import my.music.note.back.gpt.dto.ChatCompletionDto;
+import my.music.note.back.data.dto.request.gpt.ChatCompletionDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
