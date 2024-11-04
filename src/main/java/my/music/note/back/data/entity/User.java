@@ -25,21 +25,21 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String name;
+    private String name;
 
-    LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
-    String email;
+    private String email;
 
-    String provider;
+    private String provider;
 
-    String providerId;
+    private String providerId;
 
-    Boolean isAdmin;
+    private Boolean isAdmin;
 
-    Boolean isDeleted;
+    private Boolean isDeleted;
 
     public Long getUserId() {
         return id;
