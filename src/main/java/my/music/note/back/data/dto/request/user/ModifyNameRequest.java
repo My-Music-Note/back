@@ -1,4 +1,4 @@
-package my.music.note.back.user.dto.request;
+package my.music.note.back.data.dto.request.user;
 
 public record ModifyNameRequest(String name) {
 }
