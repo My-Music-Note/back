@@ -1,15 +1,15 @@
-package my.music.note.back.user.controller;
+package my.music.note.back.controller;
 
 import lombok.RequiredArgsConstructor;
-import my.music.note.back.jwt.dto.response.TokenCreateResponse;
-import my.music.note.back.jwt.service.TokenService;
-import my.music.note.back.user.dto.request.DeleteAccountRequest;
-import my.music.note.back.user.dto.request.FindUserRequest;
-import my.music.note.back.user.dto.request.LoginOrRegisterRequest;
-import my.music.note.back.user.dto.request.ModifyNameRequest;
-import my.music.note.back.user.dto.response.FindUserResponse;
-import my.music.note.back.user.entity.User;
-import my.music.note.back.user.service.UserService;
+import my.music.note.back.data.dto.response.jwt.TokenCreateResponse;
+import my.music.note.back.service.TokenService;
+import my.music.note.back.data.dto.request.user.DeleteAccountRequest;
+import my.music.note.back.data.dto.request.user.FindUserRequest;
+import my.music.note.back.data.dto.request.user.LoginOrRegisterRequest;
+import my.music.note.back.data.dto.request.user.ModifyNameRequest;
+import my.music.note.back.data.dto.response.user.FindUserResponse;
+import my.music.note.back.data.entity.User;
+import my.music.note.back.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

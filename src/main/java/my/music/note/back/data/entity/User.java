@@ -1,15 +1,15 @@
-package my.music.note.back.user.entity;
+package my.music.note.back.data.entity;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import my.music.note.back.user.dto.request.LoginOrRegisterRequest;
-import my.music.note.back.user.dto.request.ModifyNameRequest;
-import my.music.note.back.user.dto.response.FindUserResponse;
+import my.music.note.back.data.dto.request.user.LoginOrRegisterRequest;
+import my.music.note.back.data.dto.request.user.ModifyNameRequest;
+import my.music.note.back.data.dto.response.user.FindUserResponse;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @NoArgsConstructor
 public class User {
 

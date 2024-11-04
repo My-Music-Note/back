@@ -1,6 +1,6 @@
-package my.music.note.back.user.repository;
+package my.music.note.back.data.repository;
 
-import my.music.note.back.user.entity.User;
+import my.music.note.back.data.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
