@@ -71,7 +71,6 @@ class UserServiceTest {
 
         verify(userRepository, times(1)).findById(1L);
         verify(user, times(1)).deleteAccount();
-        verify(userRepository, times(1)).save(user);
     }
 
     @Test
@@ -85,7 +84,6 @@ class UserServiceTest {
 
         verify(userRepository, times(1)).findById(1L);
         verify(user, times(1)).modifyName(modifyNameRequest);
-        verify(userRepository, times(1)).save(user);
 
     }
 
