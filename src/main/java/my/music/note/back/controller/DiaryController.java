@@ -1,10 +1,10 @@
 package my.music.note.back.controller;
 
 import lombok.RequiredArgsConstructor;
-import my.music.note.back.data.dto.request.diary.DiaryCreateRequest;
-import my.music.note.back.data.dto.request.diary.DiaryDeleteRequest;
-import my.music.note.back.data.dto.request.diary.DiaryModifyRequest;
-import my.music.note.back.data.dto.response.diary.FindDiaryResponse;
+import my.music.note.back.data.dto.diary.request.DiaryCreateRequest;
+import my.music.note.back.data.dto.diary.request.DiaryDeleteRequest;
+import my.music.note.back.data.dto.diary.request.DiaryModifyRequest;
+import my.music.note.back.data.dto.diary.response.FindDiaryResponse;
 import my.music.note.back.service.DiaryService;
 import my.music.note.back.service.TokenService;
 import org.springframework.http.HttpStatus;
@@ -34,8 +34,8 @@ public class DiaryController {
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.OK)
     public void modifyDiary(@RequestBody DiaryModifyRequest request) {
-
         diaryService.modifyDiary(request);
     }
 
@@ -44,7 +44,6 @@ public class DiaryController {
 
         FindDiaryResponse response = diaryService.findDiary(diaryId);
         return new ResponseEntity<>(response, HttpStatus.OK);
-
     }
 
     @GetMapping

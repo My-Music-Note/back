@@ -2,8 +2,8 @@ package my.music.note.back.gpt.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import my.music.note.back.controller.ChatGPTController;
-import my.music.note.back.data.dto.request.gpt.ChatCompletionDto;
-import my.music.note.back.data.dto.request.gpt.ChatRequestMsgDto;
+import my.music.note.back.data.dto.gpt.request.ChatCompletionDto;
+import my.music.note.back.data.dto.gpt.request.ChatRequestMsgDto;
 import my.music.note.back.service.ChatGPTService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

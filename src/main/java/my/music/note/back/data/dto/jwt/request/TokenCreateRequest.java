@@ -1,4 +1,4 @@
-package my.music.note.back.data.dto.request.jwt;
+package my.music.note.back.data.dto.jwt.request;
 
 public record TokenCreateRequest(String providerId, boolean isAdmin) {
 

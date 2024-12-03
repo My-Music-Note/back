@@ -2,7 +2,7 @@ package my.music.note.back.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import my.music.note.back.data.dto.request.gpt.ChatCompletionDto;
+import my.music.note.back.data.dto.gpt.request.ChatCompletionDto;
 import my.music.note.back.service.ChatGPTService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -2,9 +2,9 @@ package my.music.note.back.data.entity;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import my.music.note.back.data.dto.request.diary.DiaryCreateRequest;
-import my.music.note.back.data.dto.request.diary.DiaryModifyRequest;
-import my.music.note.back.data.dto.response.diary.FindDiaryResponse;
+import my.music.note.back.data.dto.diary.request.DiaryCreateRequest;
+import my.music.note.back.data.dto.diary.request.DiaryModifyRequest;
+import my.music.note.back.data.dto.diary.response.FindDiaryResponse;
 
 import java.time.LocalDateTime;
 

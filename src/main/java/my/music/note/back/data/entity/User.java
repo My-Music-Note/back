@@ -2,9 +2,9 @@ package my.music.note.back.data.entity;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import my.music.note.back.data.dto.request.user.LoginOrRegisterRequest;
-import my.music.note.back.data.dto.request.user.ModifyNameRequest;
-import my.music.note.back.data.dto.response.user.FindUserResponse;
+import my.music.note.back.data.dto.user.request.LoginOrRegisterRequest;
+import my.music.note.back.data.dto.user.request.ModifyNameRequest;
+import my.music.note.back.data.dto.user.response.FindUserResponse;
 
 import java.time.LocalDateTime;
 

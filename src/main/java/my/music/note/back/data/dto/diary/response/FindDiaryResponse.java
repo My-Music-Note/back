@@ -1,4 +1,4 @@
-package my.music.note.back.data.dto.response.diary;
+package my.music.note.back.data.dto.diary.response;
 
 import java.time.LocalDateTime;
 
