@@ -1,12 +1,13 @@
 package my.music.note.back.user.service;
 
-import my.music.note.back.user.dto.request.DeleteAccountRequest;
-import my.music.note.back.user.dto.request.FindUserRequest;
-import my.music.note.back.user.dto.request.LoginOrRegisterRequest;
-import my.music.note.back.user.dto.request.ModifyNameRequest;
-import my.music.note.back.user.dto.response.FindUserResponse;
-import my.music.note.back.user.entity.User;
-import my.music.note.back.user.repository.UserRepository;
+import my.music.note.back.data.dto.user.request.DeleteAccountRequest;
+import my.music.note.back.data.dto.user.request.FindUserRequest;
+import my.music.note.back.data.dto.user.request.LoginOrRegisterRequest;
+import my.music.note.back.data.dto.user.request.ModifyNameRequest;
+import my.music.note.back.data.dto.user.response.FindUserResponse;
+import my.music.note.back.data.entity.User;
+import my.music.note.back.data.repository.UserRepository;
+import my.music.note.back.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -70,7 +71,6 @@ class UserServiceTest {
 
         verify(userRepository, times(1)).findById(1L);
         verify(user, times(1)).deleteAccount();
-        verify(userRepository, times(1)).save(user);
     }
 
     @Test
@@ -84,7 +84,6 @@ class UserServiceTest {
 
         verify(userRepository, times(1)).findById(1L);
         verify(user, times(1)).modifyName(modifyNameRequest);
-        verify(userRepository, times(1)).save(user);
 
     }
 

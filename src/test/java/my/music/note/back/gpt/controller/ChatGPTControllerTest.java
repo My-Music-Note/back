@@ -1,13 +1,13 @@
 package my.music.note.back.gpt.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import my.music.note.back.gpt.dto.ChatCompletionDto;
-import my.music.note.back.gpt.dto.ChatRequestMsgDto;
-import my.music.note.back.gpt.service.ChatGPTService;
+import my.music.note.back.controller.ChatGPTController;
+import my.music.note.back.data.dto.gpt.request.ChatCompletionDto;
+import my.music.note.back.data.dto.gpt.request.ChatRequestMsgDto;
+import my.music.note.back.service.ChatGPTService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
