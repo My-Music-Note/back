@@ -1,8 +1,9 @@
 package my.music.note.back.gpt.service;
 
 import my.music.note.back.config.ChatGPTConfig;
-import my.music.note.back.gpt.dto.ChatCompletionDto;
-import my.music.note.back.gpt.dto.ChatRequestMsgDto;
+import my.music.note.back.data.dto.gpt.request.ChatCompletionDto;
+import my.music.note.back.data.dto.gpt.request.ChatRequestMsgDto;
+import my.music.note.back.service.ChatGPTService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
