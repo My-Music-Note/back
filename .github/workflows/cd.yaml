@@ -8,12 +8,12 @@ env:
   PROJECT_NAME: back
   CODE_DEPLOY_APP_NAME: back-app
   DEPLOYMENT_GROUP_NAME: back-deploy
+  AWS_REGION: ap-northeast-2
 
 jobs:
-  build-with-gradle:
-    runs-on: ubuntu-20.04
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-
       - name: Checkout PR
         uses: actions/checkout@v3
         with:
@@ -25,28 +25,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
-
       - name: AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
-
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
-        shell: bash
-
-      - name: Build with Gradle
-        run: ./gradlew build
-        shell: bash
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -57,7 +41,7 @@ jobs:
           username: masiljangajji
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
           push: true
@@ -65,13 +49,15 @@ jobs:
           tags: |
             masiljangajji/back-app:latest
             masiljangajji/back-app:${{ github.sha }}
+#          cache-from: type=inline
+#          cache-to: type=inline
 
-      - name: Zip artifact for CodeDeploy
+      - name: Deploy via CodeDeploy
         run: |
-          zip -r $GITHUB_SHA.zip appspec.yml scripts/
+          aws deploy create-deployment \
+            --application-name ${{ env.CODE_DEPLOY_APP_NAME }} \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --deployment-group-name ${{ env.DEPLOYMENT_GROUP_NAME }} \
+            --s3-location bucket=${{ secrets.BUCKET_NAME }},bundleType=zip,key=${{ env.PROJECT_NAME }}/deployment.zip
 
-      - name: S3 Upload zip
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://${{ secrets.BUCKET_NAME }}/${{ env.PROJECT_NAME }}/$GITHUB_SHA.zip
 
-      - name: CodeDeploy
-        run: aws deploy create-deployment --application-name $CODE_DEPLOY_APP_NAME --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name $DEPLOYMENT_GROUP_NAME --s3-location bucket=${{ secrets.BUCKET_NAME }},bundleType=zip,key=${{ env.PROJECT_NAME }}/$GITHUB_SHA.zip
