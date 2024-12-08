@@ -16,7 +16,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/chatGpt")
+@RequestMapping("/api/chatGpt")
 public class ChatGPTController {
 
     private final ChatGPTService chatGPTService;

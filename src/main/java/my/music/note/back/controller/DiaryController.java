@@ -2,7 +2,6 @@ package my.music.note.back.controller;
 
 import lombok.RequiredArgsConstructor;
 import my.music.note.back.data.dto.diary.request.DiaryCreateRequest;
-import my.music.note.back.data.dto.diary.request.DiaryDeleteRequest;
 import my.music.note.back.data.dto.diary.request.DiaryModifyRequest;
 import my.music.note.back.data.dto.diary.response.FindDiaryResponse;
 import my.music.note.back.service.DiaryService;
@@ -13,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/api/diaries")
+@RestController
+@RequestMapping("/api/diaries")
 @RequiredArgsConstructor
 public class DiaryController {
 
@@ -23,26 +23,29 @@ public class DiaryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void createDiary(@RequestBody DiaryCreateRequest request) {
-        diaryService.createDiary(request);
+    public void createDiary(@RequestHeader("Authorization") String token, @RequestBody DiaryCreateRequest request) {
+        Long userId = tokenService.getUserId(token);
+        diaryService.createDiary(request, userId);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{diaryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteDiary(@RequestBody DiaryDeleteRequest request) {
-        diaryService.deleteDiary(request);
+    public void deleteDiary(@RequestHeader("Authorization") String token, @PathVariable Long diaryId) {
+        Long userId = tokenService.getUserId(token);
+        diaryService.deleteDiary(diaryId, userId);
     }
 
-    @PutMapping
+    @PutMapping("/{diaryId}")
     @ResponseStatus(HttpStatus.OK)
-    public void modifyDiary(@RequestBody DiaryModifyRequest request) {
-        diaryService.modifyDiary(request);
+    public void modifyDiary(@RequestHeader("Authorization") String token, @PathVariable Long diaryId, @RequestBody DiaryModifyRequest request) {
+        Long userId = tokenService.getUserId(token);
+        diaryService.modifyDiary(diaryId, userId, request);
     }
 
     @GetMapping("/{diaryId}")
-    public ResponseEntity<FindDiaryResponse> FindDiaryResponse(@PathVariable Long diaryId) {
-
-        FindDiaryResponse response = diaryService.findDiary(diaryId);
+    public ResponseEntity<FindDiaryResponse> FindDiaryResponse(@RequestHeader("Authorization") String token, @PathVariable Long diaryId) {
+        Long userId = tokenService.getUserId(token);
+        FindDiaryResponse response = diaryService.findDiary(diaryId, userId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -53,7 +56,6 @@ public class DiaryController {
         List<FindDiaryResponse> response = diaryService.findDiaries(userId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
 
 
 }

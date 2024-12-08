@@ -1,7 +1,6 @@
-package my.music.note.back.user.controller;
+package my.music.note.back.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import my.music.note.back.controller.UserController;
 import my.music.note.back.data.dto.jwt.response.TokenCreateResponse;
 import my.music.note.back.data.dto.user.request.DeleteAccountRequest;
 import my.music.note.back.data.dto.user.request.FindUserRequest;
@@ -119,4 +118,5 @@ class UserControllerTest {
         verify(tokenService, times(1)).getUserId(anyString());
 
     }
+
 }

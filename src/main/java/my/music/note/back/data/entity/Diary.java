@@ -31,15 +31,16 @@ public class Diary {
 
     private Boolean isDeleted;
 
-    private Diary(LocalDateTime createdAt, String content, Boolean isLongEntry) {
+    private Diary(LocalDateTime createdAt, String content, Boolean isLongEntry,User user) {
         this.createdAt = createdAt;
         this.content = content;
         this.isLongEntry = isLongEntry;
         this.isDeleted = false;
+        this.user = user;
     }
 
-    public static Diary of(DiaryCreateRequest request) {
-        return new Diary(LocalDateTime.now(), request.content(), request.isLongEntry());
+    public static Diary of(DiaryCreateRequest request,User user) {
+        return new Diary(LocalDateTime.now(), request.content(), request.isLongEntry(),user);
     }
 
     public void modifyDiaryContent(DiaryModifyRequest request) {
