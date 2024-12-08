@@ -1,4 +1,4 @@
-package my.music.note.back.user.service;
+package my.music.note.back.service;
 
 import my.music.note.back.data.dto.user.request.DeleteAccountRequest;
 import my.music.note.back.data.dto.user.request.FindUserRequest;
@@ -7,7 +7,6 @@ import my.music.note.back.data.dto.user.request.ModifyNameRequest;
 import my.music.note.back.data.dto.user.response.FindUserResponse;
 import my.music.note.back.data.entity.User;
 import my.music.note.back.data.repository.UserRepository;
-import my.music.note.back.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
