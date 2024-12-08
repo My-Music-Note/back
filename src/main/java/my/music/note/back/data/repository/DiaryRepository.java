@@ -15,4 +15,6 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
 
     Optional<FindDiaryResponse> findByUserIdAndIdAndIsDeletedFalse(Long userId,Long diaryId);
 
+    Diary queryById(Long diaryId);
+
 }

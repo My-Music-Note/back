@@ -45,7 +45,7 @@ public class DiaryService {
             throw new IllegalArgumentException();
         }
 
-        Diary diary = diaryRepository.findById(diaryId).orElseThrow(IllegalArgumentException::new);
+        Diary diary = diaryRepository.queryById(diaryId);
         diary.modifyDiaryContent(diaryModifyRequest);
     }
 
