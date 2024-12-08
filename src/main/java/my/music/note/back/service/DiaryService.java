@@ -41,12 +41,11 @@ public class DiaryService {
 
     public void modifyDiary(Long diaryId, Long userId, DiaryModifyRequest diaryModifyRequest) {
 
-
         if (!diaryRepository.existsByIdAndUserId(userId, diaryId)) {
             throw new IllegalArgumentException();
         }
 
-        Diary diary = diaryRepository.findById(diaryId).get();
+        Diary diary = diaryRepository.findById(diaryId).orElseThrow(IllegalArgumentException::new);
         diary.modifyDiaryContent(diaryModifyRequest);
     }
 
