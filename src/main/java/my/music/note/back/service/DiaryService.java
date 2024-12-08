@@ -3,14 +3,15 @@ package my.music.note.back.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import my.music.note.back.data.dto.diary.request.DiaryCreateRequest;
-import my.music.note.back.data.dto.diary.request.DiaryDeleteRequest;
 import my.music.note.back.data.dto.diary.request.DiaryModifyRequest;
 import my.music.note.back.data.dto.diary.response.FindDiaryResponse;
 import my.music.note.back.data.entity.Diary;
+import my.music.note.back.data.entity.User;
 import my.music.note.back.data.repository.DiaryRepository;
+import my.music.note.back.data.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -19,21 +20,33 @@ public class DiaryService {
 
     private final DiaryRepository diaryRepository;
 
-    public void createDiary(DiaryCreateRequest diaryCreateRequest) {
+    private final UserRepository userRepository;
 
-        Diary diary = Diary.of(diaryCreateRequest);
+    public void createDiary(DiaryCreateRequest diaryCreateRequest, Long userId) {
+
+        User user = userRepository.findById(userId).orElseThrow();
+
+        Diary diary = Diary.of(diaryCreateRequest, user);
         diaryRepository.save(diary);
     }
 
-    public void deleteDiary(DiaryDeleteRequest diaryDeleteRequest) {
-        diaryRepository.deleteById(diaryDeleteRequest.diaryId());
+    public void deleteDiary(Long diaryId, Long userId) {
+
+        if (!diaryRepository.existsByIdAndUserId(diaryId, userId)) {
+            throw new IllegalArgumentException();
+        }
+
+        diaryRepository.deleteById(diaryId);
     }
 
-    public void modifyDiary(DiaryModifyRequest diaryModifyRequest) {
+    public void modifyDiary(Long diaryId, Long userId, DiaryModifyRequest diaryModifyRequest) {
 
-        Optional<Diary> optionalDiary = diaryRepository.findById(diaryModifyRequest.id());
 
-        Diary diary = optionalDiary.orElseThrow(IllegalArgumentException::new);
+        if (!diaryRepository.existsByIdAndUserId(userId, diaryId)) {
+            throw new IllegalArgumentException();
+        }
+
+        Diary diary = diaryRepository.findById(diaryId).get();
         diary.modifyDiaryContent(diaryModifyRequest);
     }
 
@@ -41,15 +54,9 @@ public class DiaryService {
         return diaryRepository.findAllByUserIdAndIsDeletedFalse(userId);
     }
 
-    public FindDiaryResponse findDiary(Long diaryId) {
-        Optional<Diary> optionalDiary = diaryRepository.findById(diaryId);
-        Diary diary = optionalDiary.orElseThrow(IllegalArgumentException::new);
+    public FindDiaryResponse findDiary(Long diaryId, Long userId) {
 
-        if (diary.isDeleted()) {
-            throw new IllegalArgumentException();
-        }
-
-        return diary.convertToFindDiaryResponse();
+        return diaryRepository.findByUserIdAndIdAndIsDeletedFalse(userId, diaryId).orElseThrow(IllegalArgumentException::new);
     }
 
 }
