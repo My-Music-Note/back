@@ -111,4 +111,7 @@ My-Music-Note는 일기와 음악을 통한 나만의 AI친구 사비스입니�
 2. `CodeDeploy`를 사용하는 목적은 `Blue/Green` 배포 + `ASG`로 생성된 `EC2`배포 자동화의 목적 
 3. `Docker`를 사용함으로서 동일한 환경을 제공
 
+## SonarCloud 
+
+![SonarCloud](https://github.com/user-attachments/assets/29da23e1-4df1-4aca-ac74-343222f01110)
 
