@@ -67,7 +67,12 @@ class DiaryServiceTest {
 
         when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        assertThrows(NoSuchElementException.class, () -> diaryService.createDiary(new DiaryCreateRequest("test-content", true), 1L));
+        DiaryCreateRequest request = new DiaryCreateRequest("test-content", true);
+
+        assertThrows(NoSuchElementException.class, () ->
+                diaryService.createDiary(request, 1L)
+        );
+
     }
 
 
@@ -116,8 +121,14 @@ class DiaryServiceTest {
     @Test
     @DisplayName("일기 내용 수정 실패 - 해당 유저 or 일기 존재하지 않음")
     void modifyDiaryTestFailure() {
+
         when(diaryRepository.existsByIdAndUserId(1L, 1L)).thenReturn(false);
-        assertThrows(IllegalArgumentException.class, () -> diaryService.modifyDiary(1L, 1L, new DiaryModifyRequest("modify-test-content")));
+
+        DiaryModifyRequest request = new DiaryModifyRequest("modify-test-content");
+
+        assertThrows(IllegalArgumentException.class, () ->
+                diaryService.modifyDiary(1L, 1L, request)
+        );
     }
 
     @Test
