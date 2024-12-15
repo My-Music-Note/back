@@ -34,7 +34,7 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findById(request.id());
 
         User user = optionalUser.orElseThrow(RuntimeException::new);
-        user.deleteAccount();;
+        user.deleteAccount();
     }
 
     public void modifyName(ModifyNameRequest request, Long userId) {
