@@ -22,7 +22,6 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User loginOrRegister(LoginOrRegisterRequest request) {
-
         if (userRepository.existsByProviderId(request.providerId())) {
             return userRepository.findByProviderId(request.providerId());
         }
@@ -34,13 +33,11 @@ public class UserService {
     public void deleteUser(DeleteAccountRequest request) {
         Optional<User> optionalUser = userRepository.findById(request.id());
 
-        
         User user = optionalUser.orElseThrow(RuntimeException::new);
-        user.deleteAccount();;
+        user.deleteAccount();
     }
 
     public void modifyName(ModifyNameRequest request, Long userId) {
-
         Optional<User> optionalUser = userRepository.findById(userId);
         User user = optionalUser.orElseThrow(RuntimeException::new);
 
