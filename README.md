@@ -1,5 +1,5 @@
 #   🎶 My-Music-Note
-My-Music-Note는 일기와 음악을 통한 나만의 AI친구 사비스입니다.
+My-Music-Note는 일기와 음악을 통한 나만의 AI친구 서비스입니다.
 - URL: www.musicdiaryclub.com
 - [api-server-repo](https://github.com/My-Music-Note/back)
 
