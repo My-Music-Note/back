@@ -11,8 +11,7 @@
 - 빌드도구: Gradle
 - 개발
   - Spring Boot: 3.3.4
-  - Spring Data
-    - Spring Data JPA
+  - Spring Data JPA
 - 테스트
   - Junit5
   - AssertJ
@@ -31,9 +30,10 @@
   - Docker
 - 데이터베이스
   - AWS RDS PostgreSQL 16.3
-  - AWS S3
 - ERD
   - ERDCloud
+- ETC
+   - Post Man
 
 ### 사용 기술
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
