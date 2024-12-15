@@ -1,5 +1,8 @@
 #   🎶 My-Music-Note
-- My-Music-Note는 일기와 음악을 통한 나만의 AI친구 사비스입니다.
+My-Music-Note는 일기와 음악을 통한 나만의 AI친구 사비스입니다.
+- [api-server-repo](https://github.com/My-Music-Note/back)
+
+
 
 ### 개발 환경
 - 개발도구: Intellij IDEA - Ultimate
@@ -68,6 +71,7 @@
 - **문제점**: 단일 서버 구성으로 장애 발생 시 서비스가 중단될 위험이 있었으며, 트래픽 증가 시 확장성이 부족했습니다.
 - **해결방안**:
   - `Auto Scaling Group과 Application Load Balancer`를 결합하여 고가용성 아키텍처를 구축했습니다.
+  - `Blue/Green 배포` 방식을 적용하여 무중단 배포를 실현했습니다.
   - `JMeter`를 이용해 가상 사용자 4000명 테스트를 진행했으며, Auto Scaling Group이 트래픽 부하에 따라 3분 내에 새로운 인스턴스를 자동 생성하여 부하를 분산했습니다.
 
 ### 1. 효율적인 CI/CD 파이프라인 구축
@@ -101,9 +105,9 @@
 
 ![CI:CD](https://github.com/user-attachments/assets/f96eb2c9-a07a-42cd-b910-4bd0344e22f2)
 
-0. 인프라 관리비용 최소화를 위해 Jenkins 대신 Github Ations 사용
-1. S3는 CodeDeploy가 실행시킬 Script를 저장
-2. CodeDeploy를 사용하는 목적은 Blue/Green 배포 + ASG로 생성된 EC2배포 자동화의 목적 
-3. Docker를 사용함으로서 동일한 환경을 제공
+0. 인프라 관리비용 최소화를 위해 `Jenkins` 대신 `Github Ations` 사용
+1. `S3`는 `CodeDeploy`가 실행시킬 Script를 저장
+2. `CodeDeploy`를 사용하는 목적은 `Blue/Green` 배포 + `ASG`로 생성된 `EC2`배포 자동화의 목적 
+3. `Docker`를 사용함으로서 동일한 환경을 제공
 
 
